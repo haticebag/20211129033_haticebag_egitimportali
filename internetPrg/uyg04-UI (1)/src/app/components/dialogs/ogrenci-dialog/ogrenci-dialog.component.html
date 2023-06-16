@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container">
+
+  <form [formGroup]="frm">
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="ogrNo" placeholder="Öğrenci Numarası" name="ogrNo" required type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="ogrAdsoyad" placeholder="Adı Soyadı" name="ogrAdsoyad" required type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="ogrDogTarih" placeholder="Doğum Tarihi" name="ogrDogTarih" required
+        type="number">
+    </mat-form-field>
+  </form>
+
+</div>
+
+<button mat-raised-button color="primary" (click)="dialogRef.close(frm.value)"
+  [disabled]="frm.invalid">Kaydet</button>&nbsp;
+<button mat-raised-button color="warn" (click)="dialogRef.close()">Kapat</button>

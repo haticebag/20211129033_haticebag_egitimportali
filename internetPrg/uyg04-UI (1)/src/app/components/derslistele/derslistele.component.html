@@ -1,0 +1,47 @@
+<h2>Ders Listelesi</h2>
+<p><b>Öğrenci No : </b> {{secOgrenci?.ogrNo}}</p>
+<p><b>Adı Soyadı : </b> {{secOgrenci?.ogrAdsoyad}}</p>
+
+<mat-form-field appearance="outline" style="width: 50%;">
+  <mat-select placeholder="Ders Seçiniz" (selectionChange)="DersSec($event.value)">
+    <mat-option [value]="ders.dersId" *ngFor="let ders of dersler">{{ders.dersAdi}}</mat-option>
+  </mat-select>
+</mat-form-field>
+&nbsp;
+<button mat-fab color="primary" (click)="Kaydet()">
+  <mat-icon aria-label="label">add</mat-icon>
+</button>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="dersKodu">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ders Kodu
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi.dersKodu}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dersAdi">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ders Adı
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi.dersAdi}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dersKredi">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ders Kredi
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dersBilgi.dersKredi}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="islemler">
+    <mat-header-cell *matHeaderCellDef> İşlemler
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit">
+
+      <button mat-icon-button color="warn" matTooltip="Ders Kaydını Sil" (click)="DersSil(kayit)">
+        <mat-icon aria-label="label">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [length]="kayitlar?.length" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+</mat-paginator>
